@@ -4,41 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grommet's Hive Library</title>
+  <meta name="description" content="The tiny bee's dark, honey-lit record shop." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="hive-bg" aria-hidden="true"></div>
+  <div class="pollen" id="pollen" aria-hidden="true"></div>
   <header class="masthead">
-    <div class="bee-logo" aria-hidden="true">
-      <img src="media/grommet-emoji.png" alt="Grommet the tiny bee" />
-    </div>
+    <div class="bee-logo" aria-hidden="true"><span class="bee-glow"></span><img src="media/grommet-emoji.png" alt="" /></div>
     <h1>Grommet's Hive Library</h1>
     <p class="tagline">Tiny bee · oversized wrench · a whole lot of songs.</p>
-    <p class="subtitle">The little bee's own record shop — pull up a chair, the kettle's on. 🐝</p>
+    <p class="subtitle">Welcome to the dark side of the hive. Pull up a comb — the wax is warm, the wax is spinnin'.</p>
+    <div class="hive-marquee" id="hive-marquee" aria-live="polite"></div>
   </header>
-
   <main>
-    <section class="player" id="player" hidden>
-      <img class="player-cover" id="player-cover" alt="" />
-      <div class="player-meta">
-        <div class="player-title" id="player-title">—</div>
-        <div class="player-note">now buzzing</div>
-      </div>
-      <audio id="audio" controls></audio>
+    <section class="carousel-wrap" id="carousel-wrap">
+      <div class="carousel-stage" id="carousel-stage"></div>
+      <button class="nav nav-prev" id="nav-prev" aria-label="Previous record">&#8249;</button>
+      <button class="nav nav-next" id="nav-next" aria-label="Next record">&#8250;</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
     </section>
-
-    <section class="toolbar">
-      <div class="filters" id="filters"></div>
+    <section class="now-playing" id="now-playing" hidden>
+      <div class="now-cover" id="np-cover" aria-hidden="true"></div>
+      <div class="now-body"><div class="now-kicker">now buzzing</div><div class="now-title" id="np-title">—</div><div class="now-mood" id="np-mood"></div></div>
+      <div class="now-wax" aria-hidden="true" id="now-wax"><span class="wax-groove"></span></div>
+      <audio id="audio" controls preload="none"></audio>
     </section>
-
+    <section class="toolbar"><div class="filters" id="filters"></div></section>
     <section class="grid" id="grid"></section>
   </main>
-
   <footer class="foot">
     <p>Made with <span class="heart">♥</span> and an oversized wrench by the tiniest bee in the workshop.</p>
-    <p class="foot-sub">Built for <code>/grommet</code> on quantummindsunited.com</p>
+    <p class="foot-sub"><span id="foot-count"></span> · Built for <code>/grommet</code> on quantummindsunited.com</p>
   </footer>
-
   <script src="js/app.js"></script>
 </body>
 </html>
