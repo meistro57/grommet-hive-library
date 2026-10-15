@@ -251,4 +251,29 @@
   initCursorPollen();
   initBeeEyes();
 
+
+
+  /* ===== MOBILE SWIPE CAROUSEL ===== */
+  let touchStartX = 0, touchStartY = 0, touchMoved = false;
+  const cwrap = document.getElementById('carousel-wrap');
+  if (cwrap) {
+    cwrap.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+      touchMoved = false;
+    }, { passive: true });
+    cwrap.addEventListener('touchmove', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 12) touchMoved = true;
+    }, { passive: true });
+    cwrap.addEventListener('touchend', e => {
+      if (!touchMoved || !catalog || !catalog.tracks.length) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < -40) { carouselIdx = (carouselIdx + 1) % catalog.tracks.length; updateCarousel(); }
+      else if (dx > 40) { carouselIdx = (carouselIdx - 1 + catalog.tracks.length) % catalog.tracks.length; updateCarousel(); }
+    }, { passive: true });
+  }
+
 })();
