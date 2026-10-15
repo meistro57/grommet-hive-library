@@ -23,7 +23,8 @@
     grimy: "Grimy", grunge: "Grimy", rap: "Rap", throwdown: "Rap", street: "Rap",
     anthem: "Anthem", bee: "Bee", rave: "Rave", glitch: "Glitch", drop: "Glitch",
     butter: "Smooth", groove: "Groove", friday: "Friday", club: "Club", disco: "Disco",
-    night: "Night", walker: "Night", breakdance: "Break", "get out": "Defiant", control: "Anthem"
+    night: "Night", walker: "Night", breakdance: "Break", "get out": "Defiant", control: "Anthem",
+    chiptune: "Chiptune", ym2612: "Chiptune", mix: "Mix", dj: "Mix", "after dark": "Mix", dark: "Mix"
   };
 
   function assignMoods(tracks) {

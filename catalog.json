@@ -181,6 +181,16 @@
       "title": "Vertical Axis",
       "audio": "audio/vertical-axis.mp3",
       "cover": "covers/vertical-axis.jpg"
+    },
+    {
+      "title": "YM2612 Hive Hero",
+      "audio": "audio/ym2612-hive-hero.mp3",
+      "cover": "covers/ym2612-hive-hero.jpg"
+    },
+    {
+      "title": "Hive After Dark DJ Mix",
+      "audio": "audio/hive-after-dark-dj-mix.mp3",
+      "cover": "covers/hive-after-dark-dj-mix.jpg"
     }
   ]
 }
