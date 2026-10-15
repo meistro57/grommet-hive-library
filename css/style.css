@@ -136,3 +136,39 @@ code { background: var(--comb-lit); padding: 1px 6px; border-radius: 5px; font-s
   .nav { top: 120px; }
   .now-playing { flex-wrap: wrap; }
 }
+
+
+/* ===== Grommet's FERAL FLEX EFFECTS ===== */
+
+#cursor-canvas { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+
+.card, .slide-cover { transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease, border-color .18s ease, border-radius .3s ease; }
+.card:hover .art img, .slide-cover:hover img { animation: waxcurl .7s cubic-bezier(.22,1,.36,1) both; }
+@keyframes waxcurl { 0% { transform: perspective(600px) rotateX(0) rotateY(0); filter: brightness(1); } 40% { transform: perspective(600px) rotateX(6deg) rotateY(-4deg); filter: brightness(1.25) saturate(1.1); } 70% { transform: perspective(600px) rotateX(2deg) rotateY(1deg); filter: brightness(1.1); } 100% { transform: perspective(600px) rotateX(0) rotateY(0); filter: brightness(1); } }
+.card { position: relative; }
+.card::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); background: linear-gradient(135deg, transparent 40%, rgba(255,215,106,0.22) 100%); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.card:hover::after { opacity: 1; }
+
+.now-cover { position: relative; overflow: hidden; }
+.now-cover.drop::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 3px); animation: scanflicker .45s steps(6) both; }
+.now-cover.drop::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(245,184,46,0.35) 100%); animation: needleflash .35s ease-out both; }
+@keyframes scanflicker { 0% { opacity: 0; transform: translateY(-30%); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(30%); } }
+@keyframes needleflash { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: 0; } }
+
+.now-playing { position: relative; transition: box-shadow .12s linear; }
+
+.bee-eyes { position: absolute; z-index: 4; width: 10px; height: 10px; border-radius: 50%; background: var(--honey); box-shadow: 0 0 8px var(--honey), 0 0 16px var(--amber); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+.bee-eyes.on { opacity: 1; }
+.bee-eyes .eye { position: absolute; top: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--honey-soft); }
+.bee-eyes .eye.l { left: 0; }
+.bee-eyes .eye.r { right: 0; }
+
+body.feral .pollen .mote { animation-duration: 2s !important; }
+body.feral .bee-logo img { animation: feralshake .12s linear infinite; }
+body.feral .hive-marquee { color: #ff5d5d; animation: marqueescream .18s steps(2) infinite; }
+body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out infinite; }
+@keyframes feralshake { 0%,100% { transform: translate(0,0) rotate(0); } 25% { transform: translate(-3px,1px) rotate(-6deg); } 50% { transform: translate(3px,-2px) rotate(5deg); } 75% { transform: translate(-2px,-1px) rotate(-4deg); } }
+@keyframes marqueescream { 0% { letter-spacing: 0.12em; } 50% { letter-spacing: 0.4em; } }
+@keyframes combpulse { 0%,100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(50deg); } }
+@media (prefers-reduced-motion: reduce) { .card:hover .art img, .slide-cover:hover img, .now-cover.drop::before, .now-cover.drop::after, body.feral .bee-logo img, body.feral .hive-marquee { animation: none !important; } }
+

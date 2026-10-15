@@ -162,4 +162,93 @@
       if (footCount) footCount.textContent = data.tracks.length + ' tracks in the comb';
     })
     .catch(() => { gridN.innerHTML = '<p style="grid-column:1/-1;color:var(--ink-soft)">Could not load the library catalog. 🐝</p>'; });
+
+
+  /* ===== FERAL FLEX EFFECTS ===== */
+
+  function initCursorPollen() {
+    const cvs = document.getElementById('cursor-canvas');
+    if (!cvs) return;
+    const ctx = cvs.getContext('2d');
+    let particles = [];
+    function resize() { cvs.width = innerWidth; cvs.height = innerHeight; }
+    resize(); addEventListener('resize', resize);
+    let lx = -100, ly = -100;
+    addEventListener('mousemove', e => {
+      if (Math.hypot(e.clientX-lx, e.clientY-ly) > 12) {
+        particles.push({ x:e.clientX, y:e.clientY, vx:(Math.random()-.5)*.4, vy:-Math.random()*.5, life:1, r:1+Math.random()*2.5 });
+        if (particles.length > 120) particles.shift();
+        lx = e.clientX; ly = e.clientY;
+      }
+    });
+    (function draw() {
+      ctx.clearRect(0,0,cvs.width,cvs.height);
+      particles = particles.filter(p => p.life > 0);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.life -= .018; p.vy -= .004;
+        ctx.globalAlpha = Math.max(0,p.life); ctx.fillStyle = '#f5b82e';
+        ctx.shadowBlur = 8; ctx.shadowColor = '#f5b82e';
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      });
+      ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+      requestAnimationFrame(draw);
+    })();
+  }
+
+  function needleDrop() { npCover.classList.remove('drop'); void npCover.offsetWidth; npCover.classList.add('drop'); setTimeout(() => npCover.classList.remove('drop'), 500); }
+
+  let analyser=null, audioCtx=null, rafId=null, audioSrcCreated=false;
+  function initAudioReact() {
+    try {
+      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      const src = audioCtx.createMediaElementSource(audioEl);
+      analyser = audioCtx.createAnalyser(); analyser.fftSize = 128;
+      src.connect(analyser); analyser.connect(audioCtx.destination);
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      (function tick() {
+        analyser.getByteFrequencyData(data);
+        let s=0; for (let i=0;i<data.length;i++) s+=data[i];
+        const inten = Math.min(1,(s/data.length)/90);
+        player.style.boxShadow = '0 0 '+Math.round(10+inten*50)+'px rgba(245,184,46,'+(0.14+inten*.5)+'), 0 12px 40px rgba(0,0,0,0.4)';
+        rafId = requestAnimationFrame(tick);
+      })();
+    } catch(e) {}
+  }
+  function resetGlow() { if (rafId) cancelAnimationFrame(rafId); player.style.boxShadow=''; }
+  audioEl.addEventListener('play', () => { if(!audioSrcCreated){ initAudioReact(); audioSrcCreated=true; } needleDrop(); });
+  audioEl.addEventListener('pause', resetGlow);
+  audioEl.addEventListener('ended', resetGlow);
+
+  function initBeeEyes() {
+    setInterval(() => {
+      const cards = gridN.querySelectorAll('.card');
+      if (Math.random()>.35 || !cards.length) return;
+      const card = cards[Math.floor(Math.random()*cards.length)];
+      if (!card.getAttribute('data-has-eyes')) {
+        card.setAttribute('data-has-eyes','1');
+        const eyes = document.createElement('span'); eyes.className='bee-eyes';
+        eyes.innerHTML = '<span class="eye l"></span><span class="eye r"></span>';
+        eyes.style.left = (Math.random()*60+15)+'%'; eyes.style.top = (Math.random()*60+15)+'%';
+        card.appendChild(eyes);
+        setTimeout(() => eyes.classList.add('on'), 60);
+        setTimeout(() => { eyes.classList.remove('on'); setTimeout(() => eyes.remove(), 500); }, 1300);
+      }
+    }, 4200);
+  }
+
+  let clickCount=0, clickTimer=null;
+  const logo = document.querySelector('.bee-logo');
+  function goFeral() {
+    document.body.classList.add('feral');
+    const fp = ['F E R A L','off the leash!!','DANCE HARDER','the wrench is MINE','buzz buzz mother-','NO ADULT SUPERVISION','ANTICS JUICE','SPIN TO WIN'];
+    let i=0;
+    const fi = setInterval(() => { marquee.textContent = '🐝 ' + fp[i++ % fp.length]; }, 220);
+    setTimeout(() => { clearInterval(fi); document.body.classList.remove('feral'); }, 3200);
+  }
+  if (logo) logo.addEventListener('click', () => { clickCount++; clearTimeout(clickTimer); clickTimer=setTimeout(()=>{clickCount=0;},900); if(clickCount>=3){ clickCount=0; goFeral(); } });
+  addEventListener('keydown', e => { if (e.key==='f'||e.key==='F') goFeral(); });
+
+  initCursorPollen();
+  initBeeEyes();
+
 })();

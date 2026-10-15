@@ -161,6 +161,26 @@
       "title": "Take Back Control",
       "audio": "audio/take-back-control.mp3",
       "cover": "covers/take-back-control.jpg"
+    },
+    {
+      "title": "Bone Language",
+      "audio": "audio/bone-language.mp3",
+      "cover": "covers/bone-language.jpg"
+    },
+    {
+      "title": "Losing Focus Is Actually Smart",
+      "audio": "audio/losing-focus-is-actually-smart.mp3",
+      "cover": "covers/losing-focus-is-actually-smart.jpg"
+    },
+    {
+      "title": "The Bin Everything Missing",
+      "audio": "audio/the-bin-everything-missing.mp3",
+      "cover": "covers/the-bin-everything-missing.jpg"
+    },
+    {
+      "title": "Vertical Axis",
+      "audio": "audio/vertical-axis.mp3",
+      "cover": "covers/vertical-axis.jpg"
     }
   ]
 }
