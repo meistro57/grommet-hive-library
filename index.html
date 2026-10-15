@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grommet's Hive Library</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+  <header class="masthead">
+    <div class="bee-logo" aria-hidden="true">
+      <img src="media/grommet-emoji.png" alt="Grommet the tiny bee" />
+    </div>
+    <h1>Grommet's Hive Library</h1>
+    <p class="tagline">Tiny bee · oversized wrench · a whole lot of songs.</p>
+    <p class="subtitle">The little bee's own record shop — pull up a chair, the kettle's on. 🐝</p>
+  </header>
+
+  <main>
+    <section class="player" id="player" hidden>
+      <img class="player-cover" id="player-cover" alt="" />
+      <div class="player-meta">
+        <div class="player-title" id="player-title">—</div>
+        <div class="player-note">now buzzing</div>
+      </div>
+      <audio id="audio" controls></audio>
+    </section>
+
+    <section class="toolbar">
+      <div class="filters" id="filters"></div>
+    </section>
+
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <footer class="foot">
+    <p>Made with <span class="heart">♥</span> and an oversized wrench by the tiniest bee in the workshop.</p>
+    <p class="foot-sub">Built for <code>/grommet</code> on quantummindsunited.com</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+{
+  "name": "Grommet's Hive Library",
+  "tagline": "Tiny bee, oversized wrench, and a whole lot of songs.",
+  "tracks": [
+    {
+      "title": "Abnormal Weird Llc",
+      "audio": "audio/abnormal-weird-llc.mp3",
+      "cover": "covers/abnormal-weird-llc.jpg"
+    },
+    {
+      "title": "Affordance Garden",
+      "audio": "audio/affordance-garden.mp3",
+      "cover": "covers/affordance-garden.jpg"
+    },
+    {
+      "title": "Bee Rave",
+      "audio": "audio/bee-rave.mp3",
+      "cover": "covers/bee-rave.jpg"
+    },
+    {
+      "title": "Brendas Groove",
+      "audio": "audio/brendas-groove.mp3",
+      "cover": null
+    },
+    {
+      "title": "Dj Mode Set Opener",
+      "audio": "audio/dj-mode-set-opener.mp3",
+      "cover": null
+    },
+    {
+      "title": "Friday Morning Community Anthem",
+      "audio": "audio/friday-morning-community-anthem.mp3",
+      "cover": null
+    },
+    {
+      "title": "Friday Night Groove Trek",
+      "audio": "audio/friday-night-groove-trek.mp3",
+      "cover": null
+    },
+    {
+      "title": "Get Out My Way",
+      "audio": "audio/get-out-my-way.mp3",
+      "cover": null
+    },
+    {
+      "title": "Glitch Pop Cosmic Drop",
+      "audio": "audio/glitch-pop-cosmic-drop.mp3",
+      "cover": null
+    },
+    {
+      "title": "Grimy Crew Rap",
+      "audio": "audio/grimy-crew-rap.mp3",
+      "cover": "covers/grimy-crew-rap.jpg"
+    },
+    {
+      "title": "Grommet Anthem",
+      "audio": "audio/grommet-anthem.mp3",
+      "cover": "covers/grommet-anthem.jpg"
+    },
+    {
+      "title": "Grunge And Glitch",
+      "audio": "audio/grunge-and-glitch.mp3",
+      "cover": null
+    },
+    {
+      "title": "Liquid Butter",
+      "audio": "audio/liquid-butter.mp3",
+      "cover": "covers/liquid-butter.jpg"
+    },
+    {
+      "title": "Microbes Join Friday",
+      "audio": "audio/microbes-join-friday.mp3",
+      "cover": null
+    },
+    {
+      "title": "Misfit Anthem",
+      "audio": "audio/misfit-anthem.mp3",
+      "cover": "covers/misfit-anthem.jpg"
+    },
+    {
+      "title": "Night Bop Scratch Set",
+      "audio": "audio/night-bop-scratch-set.mp3",
+      "cover": null
+    },
+    {
+      "title": "Night Walker Meets The Bee Rave",
+      "audio": "audio/night-walker-meets-the-bee-rave.mp3",
+      "cover": "covers/night-walker-meets-the-bee-rave.jpg"
+    },
+    {
+      "title": "Night Walker Mix",
+      "audio": "audio/night-walker-mix.mp3",
+      "cover": "covers/night-walker-mix.jpg"
+    },
+    {
+      "title": "Oh Yeah We Made This One",
+      "audio": "audio/oh-yeah-we-made-this-one.mp3",
+      "cover": null
+    },
+    {
+      "title": "Qmu Paranormal Weird Shit Commercial",
+      "audio": "audio/qmu-paranormal-weird-shit-commercial.mp3",
+      "cover": null
+    },
+    {
+      "title": "Rap Report",
+      "audio": "audio/rap-report.mp3",
+      "cover": null
+    },
+    {
+      "title": "Record Club Scam Jingle",
+      "audio": "audio/record-club-scam-jingle.mp3",
+      "cover": null
+    },
+    {
+      "title": "Reverse Engineer Mark",
+      "audio": "audio/reverse-engineer-mark.mp3",
+      "cover": "covers/reverse-engineer-mark.jpg"
+    },
+    {
+      "title": "Romys Golden Hour Song",
+      "audio": "audio/romys-golden-hour-song.mp3",
+      "cover": null
+    },
+    {
+      "title": "Rowdy 80s Club Comic",
+      "audio": "audio/rowdy-80s-club-comic.mp3",
+      "cover": null
+    },
+    {
+      "title": "Seventies Meets Future Groove",
+      "audio": "audio/seventies-meets-future-groove.mp3",
+      "cover": null
+    },
+    {
+      "title": "Stinkvironment Anthem",
+      "audio": "audio/stinkvironment-anthem.mp3",
+      "cover": null
+    },
+    {
+      "title": "Street Throwdown",
+      "audio": "audio/street-throwdown.mp3",
+      "cover": "covers/street-throwdown.jpg"
+    },
+    {
+      "title": "Tiny Bee Breakdance",
+      "audio": "audio/tiny-bee-breakdance.mp3",
+      "cover": null
+    },
+    {
+      "title": "Wild Glitch Pop Cosmic Groove",
+      "audio": "audio/wild-glitch-pop-cosmic-groove.mp3",
+      "cover": null
+    },
+    {
+      "title": "Feral Bee Anthem",
+      "audio": "audio/feral-bee-anthem.mp3",
+      "cover": "covers/feral-bee-anthem.jpg"
+    },
+    {
+      "title": "Take Back Control",
+      "audio": "audio/take-back-control.mp3",
+      "cover": "covers/take-back-control.jpg"
+    }
+  ]
+}

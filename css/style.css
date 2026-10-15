@@ -1,0 +1,169 @@
+:root {
+  --honey: #f5b82e;
+  --honey-deep: #d99a1b;
+  --violet: #6b4fa3;
+  --violet-deep: #4a3378;
+  --cream: #fbf6ec;
+  --ink: #2b2333;
+  --ink-soft: #5a5066;
+  --line: #eadfce;
+  --card: #ffffff;
+  --shadow: 0 12px 30px rgba(74, 51, 120, 0.10);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(245,184,46,0.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(107,79,163,0.12), transparent 55%),
+    var(--cream);
+  min-height: 100vh;
+  line-height: 1.55;
+}
+
+.masthead {
+  text-align: center;
+  padding: 48px 20px 12px;
+}
+
+.bee-logo img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #fff;
+  box-shadow: var(--shadow);
+  padding: 4px;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
+  margin: 18px 0 4px;
+  background: linear-gradient(120deg, var(--violet-deep), var(--honey-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline { font-size: 1.1rem; color: var(--ink-soft); margin: 0; }
+.subtitle { color: var(--ink-soft); opacity: 0.85; font-size: 0.95rem; margin: 8px 0 0; }
+
+main { max-width: 1000px; margin: 0 auto; padding: 24px 20px 40px; }
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.player[hidden] { display: none; }
+
+.player-cover {
+  width: 64px; height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--line);
+}
+
+.player-meta { flex: 1; min-width: 0; }
+.player-title { font-weight: 700; font-size: 1.05rem; }
+.player-note { color: var(--ink-soft); font-size: 0.85rem; }
+
+.player audio { flex: 1; min-width: 180px; }
+
+.toolbar { margin-bottom: 18px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.filters button:hover { border-color: var(--honey); color: var(--ink); }
+.filters button.active { background: var(--honey); border-color: var(--honey); color: #3a2b00; font-weight: 600; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(74,51,120,0.05);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--honey);
+}
+
+.card .art {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, var(--honey), var(--violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card .art img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.card .art .placeholder {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.card .name {
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.card .meta {
+  padding: 0 14px 12px;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.foot {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 20px;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line);
+  background: rgba(255,255,255,0.5);
+}
+
+.heart { color: #d9534f; }
+.foot-sub { opacity: 0.75; font-size: 0.8rem; margin-top: 4px; }
+code { background: var(--line); padding: 1px 6px; border-radius: 5px; font-size: 0.85em; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
