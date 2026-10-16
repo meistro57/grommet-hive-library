@@ -18,6 +18,8 @@
   let catalog = null;
   let carouselIdx = 0;
   let beePhrases = [];
+  let currentSort = 'newest';
+  let currentMood = 'All';
 
   const tagMap = {
     grimy: "Grimy", grunge: "Grimy", rap: "Rap", throwdown: "Rap", street: "Rap",
@@ -61,6 +63,21 @@
     setInterval(() => { marquee.textContent = '🐝 ' + beePhrases[i % beePhrases.length]; i++; }, 2600);
   }
 
+  function applySort(list, mode) {
+    const copy = list.slice();
+    if (mode === 'newest') return copy.reverse();
+    if (mode === 'oldest') return copy;
+    if (mode === 'a-z') return copy.sort((a, b) => a.title.localeCompare(b.title));
+    if (mode === 'shuffle') {
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    return copy;
+  }
+
   function renderFilters(tracks) {
     const favPill = document.createElement('button');
     favPill.textContent = '♥ Favourites (0)'; favPill.dataset.mood = 'Favourites';
@@ -88,7 +105,9 @@
 
   function renderGrid(tracks, mood) {
     gridN.innerHTML = '';
-    const list = mood && mood !== 'All' ? tracks.filter(t => t.mood.includes(mood)) : tracks;
+    currentMood = mood || 'All';
+    let list = mood && mood !== 'All' ? tracks.filter(t => t.mood.includes(mood)) : tracks.slice();
+    list = applySort(list, currentSort);
     if (!list.length) { gridN.innerHTML = '<p style="grid-column:1/-1;color:var(--ink-soft)">Nothing here yet — buzz back soon. 🐝</p>'; return; }
     list.forEach(t => {
       const card = document.createElement('article');
@@ -98,6 +117,7 @@
       if (t.cover) { const img = document.createElement('img'); img.src = t.cover; img.alt = ''; img.loading = 'lazy'; art.appendChild(img); }
       else { const ph = document.createElement('span'); ph.className = 'placeholder'; ph.textContent = '🐝'; art.appendChild(ph); }
       const name = document.createElement('div'); name.className = 'name'; name.textContent = t.title;
+      if (t.isNew) { const nb = document.createElement('span'); nb.className = 'new-badge'; nb.textContent = 'NEW'; name.appendChild(nb); }
       const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = t.mood.join(' · ');
       card.appendChild(art); card.appendChild(name); card.appendChild(meta);
       card.appendChild(favButton(t));
@@ -118,6 +138,7 @@
       cover.addEventListener('click', () => play(t));
       const title = document.createElement('div'); title.className = 'slide-title'; title.textContent = t.title;
       const mood = document.createElement('div'); mood.className = 'slide-mood'; mood.textContent = t.mood.join(' · ');
+      if (t.isNew) { const nb = document.createElement('span'); nb.className = 'new-badge'; nb.textContent = 'NEW'; mood.appendChild(nb); }
       const playBtn = document.createElement('button'); playBtn.className = 'slide-play'; playBtn.textContent = '▶ Buzz it';
       playBtn.addEventListener('click', () => play(t));
       slide.appendChild(cover); slide.appendChild(title); slide.appendChild(mood); slide.appendChild(playBtn);
@@ -168,13 +189,39 @@
       catalog = data;
       document.title = data.name;
       assignMoods(data.tracks);
+      const n = data.tracks.length;
+      data.tracks.forEach((t, i) => { t.isNew = (i >= n - 4) && (i < n); });
       renderFilters(data.tracks);
       renderGrid(data.tracks, 'All');
       renderCarousel(data.tracks);
+      buildSortControl();
       if (footCount) footCount.textContent = data.tracks.length + ' tracks in the comb';
     })
     .catch(() => { gridN.innerHTML = '<p style="grid-column:1/-1;color:var(--ink-soft)">Could not load the library catalog. 🐝</p>'; });
 
+
+  function buildSortControl() {
+    if (document.getElementById('sort-select')) return;
+    const row = document.createElement('div');
+    row.className = 'sort-row';
+    const sel = document.createElement('select');
+    sel.id = 'sort-select';
+    const opts = [['newest','Newest'],['oldest','Oldest'],['a-z','A–Z'],['shuffle','Shuffle']];
+    opts.forEach(([val, label]) => {
+      const o = document.createElement('option');
+      o.value = val; o.textContent = label;
+      if (val === currentSort) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', () => {
+      currentSort = sel.value;
+      const active = filtersN.querySelector('button.active');
+      const mood = active && active.dataset.mood ? active.dataset.mood : currentMood;
+      renderGrid(catalog.tracks, mood);
+    });
+    row.appendChild(sel);
+    filtersN.parentNode.insertBefore(row, filtersN);
+  }
 
   /* ===== FERAL FLEX EFFECTS ===== */
 

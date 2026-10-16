@@ -185,3 +185,7 @@ body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out 
 .fav-btn.on { color: var(--honey); border-color: var(--honey); background: rgba(245,184,46,0.15); }
 .card { position: relative; }
 
+
+#sort-select { background: var(--comb); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 0.85rem; cursor: pointer; margin-bottom: 10px; }
+.new-badge { display: inline-block; background: var(--honey); color: #2a1c00; font-weight: 700; font-size: 0.6rem; padding: 1px 7px; border-radius: 999px; margin-left: 6px; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: middle; }
+.sort-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
