@@ -191,6 +191,26 @@
       "title": "Hive After Dark DJ Mix",
       "audio": "audio/hive-after-dark-dj-mix.mp3",
       "cover": "covers/hive-after-dark-dj-mix.jpg"
+    },
+    {
+      "title": "Tiny Bee Disaster",
+      "audio": "audio/tiny-bee-disaster.mp3",
+      "cover": "covers/tiny-bee-disaster.jpg"
+    },
+    {
+      "title": "Walk It Don't Sell It",
+      "audio": "audio/walk-it-don-t-sell-it.mp3",
+      "cover": "covers/walk-it-don-t-sell-it.jpg"
+    },
+    {
+      "title": "YM2612 Honeycomb Hop",
+      "audio": "audio/ym2612-honeycomb-hop.mp3",
+      "cover": "covers/ym2612-honeycomb-hop.jpg"
+    },
+    {
+      "title": "YM2612 Deep Hive Depths",
+      "audio": "audio/ym2612-deep-hive-depths.mp3",
+      "cover": "covers/ym2612-deep-hive-depths.jpg"
     }
   ]
 }

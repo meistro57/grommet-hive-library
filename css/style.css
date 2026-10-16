@@ -172,3 +172,16 @@ body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out 
 @keyframes combpulse { 0%,100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(50deg); } }
 @media (prefers-reduced-motion: reduce) { .card:hover .art img, .slide-cover:hover img, .now-cover.drop::before, .now-cover.drop::after, body.feral .bee-logo img, body.feral .hive-marquee { animation: none !important; } }
 
+
+.fav-btn {
+  position: absolute; top: 8px; right: 8px; z-index: 6;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--line); background: rgba(13,9,16,0.55);
+  color: var(--ink-soft); font-size: 1rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s ease; backdrop-filter: blur(3px);
+}
+.fav-btn:hover { border-color: var(--honey); color: var(--honey); }
+.fav-btn.on { color: var(--honey); border-color: var(--honey); background: rgba(245,184,46,0.15); }
+.card { position: relative; }
+

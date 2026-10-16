@@ -62,6 +62,14 @@
   }
 
   function renderFilters(tracks) {
+    const favPill = document.createElement('button');
+    favPill.textContent = '♥ Favourites (0)'; favPill.dataset.mood = 'Favourites';
+    favPill.addEventListener('click', () => {
+      filtersN.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      favPill.classList.add('active');
+      renderGrid(tracks, 'Favourites');
+    });
+    filtersN.appendChild(favPill);
     const set = new Set(['All']);
     tracks.forEach(t => t.mood.forEach(m => set.add(m)));
     [...set].forEach(m => {
@@ -75,6 +83,7 @@
       filtersN.appendChild(b);
     });
     filtersN.querySelector('button').classList.add('active');
+    updateFavPill();
   }
 
   function renderGrid(tracks, mood) {
@@ -91,6 +100,7 @@
       const name = document.createElement('div'); name.className = 'name'; name.textContent = t.title;
       const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = t.mood.join(' · ');
       card.appendChild(art); card.appendChild(name); card.appendChild(meta);
+      card.appendChild(favButton(t));
       card.addEventListener('click', () => play(t));
       card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(t); } });
       gridN.appendChild(card);
@@ -111,6 +121,7 @@
       const playBtn = document.createElement('button'); playBtn.className = 'slide-play'; playBtn.textContent = '▶ Buzz it';
       playBtn.addEventListener('click', () => play(t));
       slide.appendChild(cover); slide.appendChild(title); slide.appendChild(mood); slide.appendChild(playBtn);
+      slide.appendChild(favButton(t));
       stage.appendChild(slide);
       const d = document.createElement('button'); d.setAttribute('aria-label', 'Go to ' + t.title);
       d.addEventListener('click', () => { carouselIdx = i; updateCarousel(); });
@@ -277,4 +288,29 @@
     }, { passive: true });
   }
 
+  /* ===== FAVOURITES ===== */
+  let favs = new Set();
+  try { favs = new Set((localStorage.getItem('grommet_favs') || '').split(',').filter(Boolean)); } catch(e) {}
+  function persistFavs() { try { localStorage.setItem('grommet_favs', [...favs].join(',')); } catch(e) {} }
+  function isFav(title) { return favs.has(title); }
+  function toggleFav(title) {
+    if (favs.has(title)) favs.delete(title); else favs.add(title);
+    persistFavs();
+    const active = filtersN.querySelector('button.active');
+    if (active && active.dataset.mood === 'Favourites') renderGrid(catalog.tracks, 'Favourites');
+    else renderGrid(catalog.tracks, active ? active.dataset.mood : 'All');
+    updateFavPill();
+  }
+  function updateFavPill() {
+    const p = filtersN.querySelector('button[data-mood="Favourites"]');
+    if (p) p.textContent = '♥ Favourites (' + favs.size + ')';
+  }
+  function favButton(t) {
+    const b = document.createElement('button');
+    b.className = 'fav-btn' + (isFav(t.title) ? ' on' : '');
+    b.textContent = isFav(t.title) ? '♥' : '♡';
+    b.setAttribute('aria-label', 'Favourite ' + t.title);
+    b.addEventListener('click', e => { e.stopPropagation(); toggleFav(t.title); });
+    return b;
+  }
 })();
