@@ -211,6 +211,11 @@
       "title": "YM2612 Deep Hive Depths",
       "audio": "audio/ym2612-deep-hive-depths.mp3",
       "cover": "covers/ym2612-deep-hive-depths.jpg"
+    },
+    {
+      "title": "Friday Spin It Up",
+      "audio": "audio/friday-spin-it-up.mp3",
+      "cover": "covers/friday-spin-it-up.jpg"
     }
   ]
 }
