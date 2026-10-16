@@ -20,6 +20,8 @@
   let beePhrases = [];
   let currentSort = 'newest';
   let currentMood = 'All';
+  let autoplay = true;
+  let currentTitle = null;
 
   const tagMap = {
     grimy: "Grimy", grunge: "Grimy", rap: "Rap", throwdown: "Rap", street: "Rap",
@@ -170,15 +172,43 @@
     if (t.cover) npCover.style.backgroundImage = 'url(' + t.cover + ')';
     else npCover.style.backgroundImage = '';
     audioEl.src = t.audio;
+    currentTitle = t.title;
     audioEl.play().catch(() => {});
     player.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function playNext() {
+    if (!catalog || !catalog.tracks || !catalog.tracks.length) return;
+    if (!currentTitle) return;
+    const list = applySort(catalog.tracks.slice(), currentSort);
+    let idx = -1;
+    for (let i = 0; i < list.length; i++) { if (list[i].title === currentTitle) { idx = i; break; } }
+    if (idx === -1) return;
+    const next = list[(idx + 1) % list.length];
+    if (autoplay) play(next);
   }
 
   prevBtn.addEventListener('click', () => { carouselIdx = (carouselIdx - 1 + catalog.tracks.length) % catalog.tracks.length; updateCarousel(); });
   nextBtn.addEventListener('click', () => { carouselIdx = (carouselIdx + 1) % catalog.tracks.length; updateCarousel(); });
   audioEl.addEventListener('play', () => nowWax.setAttribute('data-playing', 'true'));
   audioEl.addEventListener('pause', () => nowWax.setAttribute('data-playing', 'false'));
-  audioEl.addEventListener('ended', () => nowWax.setAttribute('data-playing', 'false'));
+  audioEl.addEventListener('ended', () => { nowWax.setAttribute('data-playing', 'false'); playNext(); });
+
+  function buildAutoplayToggle() {
+    if (document.getElementById('autoplay-toggle')) return;
+    if (!player) return;
+    const btn = document.createElement('button');
+    btn.id = 'autoplay-toggle';
+    btn.className = 'autoplay-toggle';
+    btn.setAttribute('aria-pressed', 'true');
+    btn.textContent = 'Autoplay: on';
+    btn.addEventListener('click', () => {
+      autoplay = !autoplay;
+      btn.setAttribute('aria-pressed', autoplay ? 'true' : 'false');
+      btn.textContent = 'Autoplay: ' + (autoplay ? 'on' : 'off');
+    });
+    player.appendChild(btn);
+  }
 
   spawnPollen(24);
   buildBee();
@@ -309,6 +339,7 @@
 
   initCursorPollen();
   initBeeEyes();
+  buildAutoplayToggle();
 
 
 

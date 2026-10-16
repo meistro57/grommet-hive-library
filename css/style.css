@@ -192,3 +192,6 @@ body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out 
 
 .foot a { color: var(--honey); text-decoration: none; }
 .foot a:hover { text-decoration: underline; }
+
+.autoplay-toggle { background: var(--comb-lit); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 0.8rem; cursor: pointer; flex-shrink: 0; }
+.autoplay-toggle[aria-pressed="false"] { color: var(--ink-soft); }
