@@ -216,6 +216,21 @@
       "title": "Friday Spin It Up",
       "audio": "audio/friday-spin-it-up.mp3",
       "cover": "covers/friday-spin-it-up.jpg"
+    },
+    {
+      "title": "Dopamine Beans",
+      "audio": "audio/dopamine-beans.mp3",
+      "cover": "covers/dopamine-beans.jpg"
+    },
+    {
+      "title": "Suburban Pigeon",
+      "audio": "audio/suburban-pigeon.mp3",
+      "cover": "covers/suburban-pigeon.jpg"
+    },
+    {
+      "title": "Suburban Pigeon (Mean)",
+      "audio": "audio/suburban-pigeon-mean.mp3",
+      "cover": "covers/suburban-pigeon-mean.jpg"
     }
   ]
 }
