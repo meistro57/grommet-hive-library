@@ -281,6 +281,16 @@
       "title": "Friday Spin It Up Again",
       "audio": "audio/friday-spin-it-up-again.mp3",
       "cover": "covers/friday-spin-it-up-again.jpg"
+    },
+    {
+      "title": "Metric Fuck Ton",
+      "audio": "audio/metric-fuck-ton.mp3",
+      "cover": "covers/metric-fuck-ton.jpg"
+    },
+    {
+      "title": "Metric Fuck Ton (Street Rap)",
+      "audio": "audio/metric-fuck-ton-street-rap.mp3",
+      "cover": "covers/metric-fuck-ton-street-rap.jpg"
     }
   ]
 }
