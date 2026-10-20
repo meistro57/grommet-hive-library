@@ -231,6 +231,56 @@
       "title": "Suburban Pigeon (Mean)",
       "audio": "audio/suburban-pigeon-mean.mp3",
       "cover": "covers/suburban-pigeon-mean.jpg"
+    },
+    {
+      "title": "Hive Blacksmith Guild",
+      "audio": "audio/hive-blacksmith-guild.mp3",
+      "cover": "covers/hive-blacksmith-guild.jpg"
+    },
+    {
+      "title": "Suburban Pigeon Blues",
+      "audio": "audio/suburban-pigeon-blues.mp3",
+      "cover": "covers/suburban-pigeon-blues.jpg"
+    },
+    {
+      "title": "Plunger Poet",
+      "audio": "audio/plunger-poet.mp3",
+      "cover": "covers/plunger-poet.jpg"
+    },
+    {
+      "title": "Tiny Bee Massive Wrench",
+      "audio": "audio/tiny-bee-massive-wrench.mp3",
+      "cover": "covers/tiny-bee-massive-wrench.jpg"
+    },
+    {
+      "title": "Different Minds Same Hive",
+      "audio": "audio/different-minds-same-hive.mp3",
+      "cover": "covers/different-minds-same-hive.jpg"
+    },
+    {
+      "title": "Monday Conserve Power",
+      "audio": "audio/monday-conserve-power.mp3",
+      "cover": "covers/monday-conserve-power.jpg"
+    },
+    {
+      "title": "The Meistro Manual",
+      "audio": "audio/the-meistro-manual.mp3",
+      "cover": "covers/the-meistro-manual.jpg"
+    },
+    {
+      "title": "Ranch Dream Golden Hour",
+      "audio": "audio/ranch-dream-golden-hour.mp3",
+      "cover": "covers/ranch-dream-golden-hour.jpg"
+    },
+    {
+      "title": "Rabbit Hole Shuffle",
+      "audio": "audio/rabbit-hole-shuffle.mp3",
+      "cover": "covers/rabbit-hole-shuffle.jpg"
+    },
+    {
+      "title": "Friday Spin It Up Again",
+      "audio": "audio/friday-spin-it-up-again.mp3",
+      "cover": "covers/friday-spin-it-up-again.jpg"
     }
   ]
 }
