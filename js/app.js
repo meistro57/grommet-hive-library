@@ -108,7 +108,14 @@
   function renderGrid(tracks, mood) {
     gridN.innerHTML = '';
     currentMood = mood || 'All';
-    let list = mood && mood !== 'All' ? tracks.filter(t => t.mood.includes(mood)) : tracks.slice();
+    let list;
+  if (mood === 'Favourites') {
+    list = tracks.filter(t => favs.has(t.title));
+  } else if (mood && mood !== 'All') {
+    list = tracks.filter(t => t.mood.includes(mood));
+  } else {
+    list = tracks.slice();
+  }
     list = applySort(list, currentSort);
     if (!list.length) { gridN.innerHTML = '<p style="grid-column:1/-1;color:var(--ink-soft)">Nothing here yet — buzz back soon. 🐝</p>'; return; }
     list.forEach(t => {
