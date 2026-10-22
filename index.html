@@ -31,6 +31,16 @@
       <div class="now-cover" id="np-cover" aria-hidden="true"></div>
       <div class="now-body"><div class="now-kicker">now buzzing</div><div class="now-title" id="np-title">—</div><div class="now-mood" id="np-mood"></div></div>
       <div class="now-wax" aria-hidden="true" id="now-wax"><span class="wax-groove"></span></div>
+      <div class="eq" id="eq" aria-hidden="true">
+        <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+      </div>
+      <div class="transport" role="group" aria-label="Player controls">
+        <button class="tp-btn" id="tp-prev" title="Previous track" aria-label="Previous track">&#9198;</button>
+        <button class="tp-btn tp-main" id="tp-play" title="Play" aria-label="Play">&#9654;</button>
+        <button class="tp-btn" id="tp-next" title="Next track" aria-label="Next track">&#9197;</button>
+        <button class="tp-btn" id="tp-shuffle" title="Shuffle" aria-label="Shuffle" aria-pressed="false">&#128256;</button>
+        <button class="tp-btn" id="tp-stop" title="Stop" aria-label="Stop">&#9632;</button>
+      </div>
       <audio id="audio" controls preload="none"></audio>
     </section>
     <section class="toolbar"><div class="filters" id="filters"></div></section>

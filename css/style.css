@@ -110,6 +110,28 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .now-wax[data-playing="true"] { animation: spin 1.4s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .now-playing audio { flex: 1; min-width: 160px; max-width: 320px; }
+
+/* ===== Graphic EQ / visualizer ===== */
+.eq { display: flex; align-items: flex-end; gap: 3px; height: 30px; flex-shrink: 0; }
+.eq .eq-bar { width: 4px; border-radius: 2px; background: linear-gradient(180deg, var(--honey-soft), var(--amber)); height: 4px; transition: height .12s ease; }
+.eq.playing .eq-bar { background: linear-gradient(180deg, var(--honey-soft), var(--honey)); box-shadow: 0 0 6px var(--wax-glow); }
+
+/* ===== Transport controls ===== */
+.transport { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.tp-btn {
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--line); background: var(--comb-lit); color: var(--honey);
+  font-size: 0.85rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease, transform .15s ease, color .15s ease;
+}
+.tp-btn:hover { background: var(--honey); color: #2a1c00; transform: scale(1.08); }
+.tp-btn.tp-main { width: 40px; height: 40px; background: var(--honey); color: #2a1c00; font-size: 1rem; }
+.tp-btn.tp-main:hover { background: var(--honey-soft); }
+.tp-btn[aria-pressed="true"] { background: var(--honey); color: #2a1c00; border-color: var(--honey); box-shadow: 0 0 10px var(--wax-glow); }
+
+@media (prefers-reduced-motion: reduce) {
+  .eq .eq-bar { transition: none !important; }
+}
 .toolbar { margin-bottom: 18px; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .filters button { border: 1px solid var(--line); background: var(--comb); color: var(--ink-soft); border-radius: 999px; padding: 7px 14px; font-size: 0.85rem; cursor: pointer; transition: all .15s ease; }
