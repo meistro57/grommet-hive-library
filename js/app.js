@@ -375,39 +375,51 @@
   let analyser=null, audioCtx=null, rafId=null, audioSrcCreated=false;
   let eqBars = [];
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function initAudioReact() {
-    try {
-      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-      const src = audioCtx.createMediaElementSource(audioEl);
-      analyser = audioCtx.createAnalyser(); analyser.fftSize = 128;
-      src.connect(analyser); analyser.connect(audioCtx.destination);
-      const data = new Uint8Array(analyser.frequencyBinCount);
-      if (eqEl) eqBars = [...eqEl.querySelectorAll('.eq-bar')];
-      (function tick() {
-        analyser.getByteFrequencyData(data);
-        let s=0; for (let i=0;i<data.length;i++) s+=data[i];
-        const inten = Math.min(1,(s/data.length)/90);
-        player.style.boxShadow = '0 0 '+Math.round(10+inten*50)+'px rgba(245,184,46,'+(0.14+inten*.5)+'), 0 12px 40px rgba(0,0,0,0.4)';
-        if (eqBars.length && !reducedMotion) {
-          const n = eqBars.length;
-          for (let b = 0; b < n; b++) {
-            // Spread bins across the spectrum; skip the very lowest DC-ish bins.
-            const bin = 2 + Math.floor((data.length - 2) * (b / n));
-            const v = data[bin] || 0;
-            const h = Math.max(4, Math.min(30, Math.round((v / 255) * 30)));
-            eqBars[b].style.height = h + 'px';
+  let data = null;
+  let tickFn = null;
+  function ensureAudioReact() {
+    // Create the Web Audio graph ONCE (createMediaElementSource can only be called per element).
+    if (!audioSrcCreated) {
+      try {
+        audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+        const src = audioCtx.createMediaElementSource(audioEl);
+        analyser = audioCtx.createAnalyser(); analyser.fftSize = 128;
+        src.connect(analyser); analyser.connect(audioCtx.destination);
+        if (eqEl) eqBars = [...eqEl.querySelectorAll('.eq-bar')];
+        data = new Uint8Array(analyser.frequencyBinCount);
+        audioSrcCreated = true;
+      } catch(e) { return; }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+    // (Re)start the rAF loop if it isn't already running.
+    if (!rafId) {
+      tickFn = () => {
+        if (analyser && data) analyser.getByteFrequencyData(data);
+        if (data) {
+          let s = 0; for (let i = 0; i < data.length; i++) s += data[i];
+          const inten = Math.min(1, (s / data.length) / 90);
+          player.style.boxShadow = '0 0 ' + Math.round(10 + inten * 50) + 'px rgba(245,184,46,' + (0.14 + inten * .5) + '), 0 12px 40px rgba(0,0,0,0.4)';
+          if (eqBars.length && !reducedMotion) {
+            const n = eqBars.length;
+            for (let b = 0; b < n; b++) {
+              const bin = 2 + Math.floor((data.length - 2) * (b / n));
+              const v = data[bin] || 0;
+              const h = Math.max(4, Math.min(30, Math.round((v / 255) * 30)));
+              eqBars[b].style.height = h + 'px';
+            }
           }
         }
-        rafId = requestAnimationFrame(tick);
-      })();
-    } catch(e) {}
+        rafId = requestAnimationFrame(tickFn);
+      };
+      rafId = requestAnimationFrame(tickFn);
+    }
   }
-  function resetGlow() { if (rafId) cancelAnimationFrame(rafId); rafId = null; player.style.boxShadow=''; }
+  function resetGlow() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } player.style.boxShadow = ''; }
   function setEqFlat() {
     if (eqEl) eqEl.classList.remove('playing');
     eqBars.forEach(bar => { bar.style.height = '4px'; });
   }
-  audioEl.addEventListener('play', () => { if(!audioSrcCreated){ initAudioReact(); audioSrcCreated=true; } needleDrop(); if (eqEl) eqEl.classList.add('playing'); });
+  audioEl.addEventListener('play', () => { ensureAudioReact(); needleDrop(); if (eqEl) eqEl.classList.add('playing'); });
   audioEl.addEventListener('pause', () => { resetGlow(); setEqFlat(); });
   audioEl.addEventListener('ended', () => { resetGlow(); setEqFlat(); });
 
