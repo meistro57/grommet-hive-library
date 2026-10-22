@@ -106,7 +106,7 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .now-playing[hidden] { display: none; }
 .now-cover { width: 60px; height: 60px; border-radius: 10px; background-size: cover; background-position: center; background-color: var(--comb-lit); flex-shrink: 0; }
 .now-body { flex: 1; min-width: 0; }
-.now-kicker { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.7rem; color: var(--honey); }
+.now-kicker { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.7rem; color: var(--honey); white-space: nowrap; overflow: visible; text-overflow: clip; margin-right: 4px; }
 .now-title { font-weight: 700; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .now-mood { color: var(--ink-soft); font-size: 0.8rem; }
 .now-wax { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, #222 40%, #000 70%); border: 1px solid #000; box-shadow: inset 0 0 6px #000; position: relative; }
