@@ -130,8 +130,8 @@
       const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = t.mood.join(' · ');
       card.appendChild(art); card.appendChild(name); card.appendChild(meta);
       card.appendChild(favButton(t));
-      card.addEventListener('click', () => play(t));
-      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(t); } });
+      card.addEventListener('click', () => openDetail(t, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(t, card); } });
       gridN.appendChild(card);
     });
   }
@@ -397,5 +397,134 @@
     b.setAttribute('aria-label', 'Favourite ' + t.title);
     b.addEventListener('click', e => { e.stopPropagation(); toggleFav(t.title); });
     return b;
+  }
+
+  /* ===== DETAIL CARD LIGHTBOX ===== */
+  let detailEl = null;
+  let detailTrack = null;
+  let detailBack = null;
+  let lastFocused = null;
+
+  function buildDetail() {
+    if (detailEl) return;
+    detailEl = document.createElement('div');
+    detailEl.className = 'detail';
+    detailEl.setAttribute('role', 'dialog');
+    detailEl.setAttribute('aria-modal', 'true');
+    detailEl.setAttribute('aria-label', 'Track details');
+    detailEl.hidden = true;
+
+    detailBack = document.createElement('div');
+    detailBack.className = 'detail-backdrop';
+    detailBack.setAttribute('aria-hidden', 'true');
+
+    const card = document.createElement('div');
+    card.className = 'detail-card';
+
+    const close = document.createElement('button');
+    close.className = 'detail-close';
+    close.type = 'button';
+    close.textContent = '✕';
+    close.setAttribute('aria-label', 'Close');
+    close.addEventListener('click', closeDetail);
+
+    const art = document.createElement('div');
+    art.className = 'detail-art';
+
+    const title = document.createElement('div');
+    title.className = 'detail-title';
+
+    const mood = document.createElement('div');
+    mood.className = 'detail-mood';
+
+    const actions = document.createElement('div');
+    actions.className = 'detail-actions';
+
+    const playBtn = document.createElement('button');
+    playBtn.className = 'detail-play';
+    playBtn.type = 'button';
+    playBtn.textContent = '▶ Buzz it';
+    playBtn.addEventListener('click', () => { if (detailTrack) play(detailTrack); });
+
+    const favBtn = document.createElement('button');
+    favBtn.className = 'detail-fav';
+    favBtn.type = 'button';
+    favBtn.addEventListener('click', () => { if (detailTrack) { toggleFav(detailTrack.title); refreshDetailFav(); } });
+
+    actions.appendChild(playBtn);
+    actions.appendChild(favBtn);
+
+    card.appendChild(close);
+    card.appendChild(art);
+    card.appendChild(title);
+    card.appendChild(mood);
+    card.appendChild(actions);
+
+    detailEl.appendChild(detailBack);
+    detailEl.appendChild(card);
+    document.body.appendChild(detailEl);
+
+    detailBack.addEventListener('click', closeDetail);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && detailEl && !detailEl.hidden) closeDetail();
+    });
+  }
+
+  function refreshDetailFav() {
+    if (!detailEl || !detailTrack) return;
+    const favBtn = detailEl.querySelector('.detail-fav');
+    if (favBtn) {
+      favBtn.classList.toggle('on', isFav(detailTrack.title));
+      favBtn.textContent = isFav(detailTrack.title) ? '♥ Favourited' : '♡ Favourite';
+      favBtn.setAttribute('aria-pressed', isFav(detailTrack.title) ? 'true' : 'false');
+    }
+  }
+
+  function openDetail(t, originCard) {
+    buildDetail();
+    detailTrack = t;
+    if (originCard) lastFocused = originCard;
+
+    const art = detailEl.querySelector('.detail-art');
+    art.innerHTML = '';
+    if (t.cover) {
+      const img = document.createElement('img');
+      img.src = t.cover;
+      img.alt = t.title;
+      art.appendChild(img);
+    } else {
+      const ph = document.createElement('span');
+      ph.className = 'detail-ph';
+      ph.textContent = '🐝';
+      art.appendChild(ph);
+    }
+
+    detailEl.querySelector('.detail-title').textContent = t.title;
+
+    const mood = detailEl.querySelector('.detail-mood');
+    mood.innerHTML = '';
+    t.mood.forEach(m => {
+      const pill = document.createElement('span');
+      pill.className = 'pill';
+      pill.textContent = m;
+      mood.appendChild(pill);
+    });
+
+    const favBtn = detailEl.querySelector('.detail-fav');
+    favBtn.classList.toggle('on', isFav(t.title));
+    favBtn.textContent = isFav(t.title) ? '♥ Favourited' : '♡ Favourite';
+    favBtn.setAttribute('aria-pressed', isFav(t.title) ? 'true' : 'false');
+
+    detailEl.hidden = false;
+    document.body.style.overflow = 'hidden';
+    detailEl.querySelector('.detail-close').focus();
+  }
+
+  function closeDetail() {
+    if (!detailEl) return;
+    detailEl.hidden = true;
+    document.body.style.overflow = '';
+    detailTrack = null;
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
 })();
