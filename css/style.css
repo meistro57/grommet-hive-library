@@ -109,7 +109,7 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .now-wax .wax-groove { position: absolute; inset: 14%; border-radius: 50%; border: 2px solid #111; opacity: 0.7; }
 .now-wax[data-playing="true"] { animation: spin 1.4s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.now-playing audio { flex: 1; min-width: 160px; max-width: 320px; }
+.now-playing audio { display: none; }
 
 /* ===== Graphic EQ / visualizer ===== */
 .eq { display: flex; align-items: flex-end; gap: 5px; height: 56px; width: 100%; flex-shrink: 0; padding: 0 4px; }
