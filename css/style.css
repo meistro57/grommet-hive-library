@@ -112,8 +112,8 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .now-playing audio { display: none; }
 
 /* ===== Graphic EQ / visualizer ===== */
-.eq { display: flex; align-items: flex-end; gap: 5px; height: 56px; width: 100%; flex-shrink: 0; padding: 0 4px; }
-.eq .eq-bar { flex: 1; min-width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--honey-soft), var(--amber)); height: 4px; transition: height .12s ease, background .3s ease; }
+.eq { display: flex; align-items: flex-end; justify-content: center; gap: 5px; height: 56px; width: 100%; flex-shrink: 0; padding: 0 4px; }
+.eq .eq-bar { width: 7px; flex: 0 0 7px; border-radius: 3px; background: linear-gradient(180deg, var(--honey-soft), var(--amber)); height: 4px; transition: height .12s ease, background .3s ease; }
 .eq.playing .eq-bar { background: linear-gradient(180deg, var(--honey-soft), var(--honey)); box-shadow: 0 0 8px var(--wax-glow); animation: honeyShift 3.2s ease-in-out infinite alternate; }
 @keyframes honeyShift { 0% { filter: hue-rotate(0deg) saturate(1); } 100% { filter: hue-rotate(22deg) saturate(1.25); } }
 @media (prefers-reduced-motion: reduce) { .eq.playing .eq-bar { animation: none; } }
