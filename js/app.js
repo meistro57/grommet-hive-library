@@ -233,7 +233,7 @@
   nextBtn.addEventListener('click', () => { carouselIdx = (carouselIdx + 1) % catalog.tracks.length; updateCarousel(); });
   audioEl.addEventListener('play', () => { nowWax.setAttribute('data-playing', 'true'); setPlayBtnState(); });
   audioEl.addEventListener('pause', () => { nowWax.setAttribute('data-playing', 'false'); setPlayBtnState(); });
-  audioEl.addEventListener('ended', () => { nowWax.setAttribute('data-playing', 'false'); playNext(); });
+  audioEl.addEventListener('ended', () => { nowWax.setAttribute('data-playing', 'false'); if (autoplay) playNext(); else setEqFlat(); });
 
   function setPlayBtnState() {
     if (tpPlay) {
