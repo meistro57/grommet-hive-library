@@ -456,6 +456,25 @@
   initBeeEyes();
   buildAutoplayToggle();
   buildTransportControls();
+  buildQrButton();
+
+  function buildQrButton() {
+    const btn = document.getElementById('qr-btn');
+    const modal = document.getElementById('qr-modal');
+    const img = document.getElementById('qr-img');
+    const url = document.getElementById('qr-url');
+    const close = document.getElementById('qr-close');
+    if (!btn || !modal) return;
+    const shareUrl = window.location.href.split('#')[0];
+    if (url) url.textContent = shareUrl;
+    if (img) img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(shareUrl);
+    const open = function () { modal.hidden = false; if (close) close.focus(); };
+    const shut = function () { modal.hidden = true; btn.focus(); };
+    btn.addEventListener('click', open);
+    if (close) close.addEventListener('click', shut);
+    modal.addEventListener('click', function (e) { if (e.target === modal) shut(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) shut(); });
+  }
 
 
 

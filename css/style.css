@@ -17,7 +17,11 @@ html, body { margin: 0; padding: 0; }
 body {
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--ink);
-  background: var(--wax);
+  background-color: var(--wax);
+  background-image: linear-gradient(rgba(13,9,16,0.55), rgba(13,9,16,0.75)), url('../media/honeycomb-bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   min-height: 100vh;
   line-height: 1.55;
   overflow-x: hidden;
@@ -98,7 +102,7 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .carousel-dots { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
 .carousel-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: var(--comb-lit); cursor: pointer; transition: all .2s ease; padding: 0; }
 .carousel-dots button.active { background: var(--honey); width: 22px; border-radius: 6px; }
-.now-playing { display: flex; align-items: center; gap: 16px; background: var(--comb); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.4); margin-bottom: 22px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.now-playing { display: flex; align-items: center; flex-wrap: wrap; row-gap: 12px; gap: 16px; background: var(--comb); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.4); margin-bottom: 22px; max-width: 820px; margin-left: auto; margin-right: auto; }
 .now-playing[hidden] { display: none; }
 .now-cover { width: 60px; height: 60px; border-radius: 10px; background-size: cover; background-position: center; background-color: var(--comb-lit); flex-shrink: 0; }
 .now-body { flex: 1; min-width: 0; }
@@ -112,7 +116,7 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 .now-playing audio { display: none; }
 
 /* ===== Graphic EQ / visualizer ===== */
-.eq { display: flex; align-items: flex-end; justify-content: center; gap: 5px; height: 56px; width: 100%; flex-shrink: 0; padding: 0 4px; }
+.eq { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 52px; width: 100%; flex-shrink: 0; padding: 0 8px; margin-top: 12px; }
 .eq .eq-bar { width: 7px; flex: 0 0 7px; border-radius: 3px; background: linear-gradient(180deg, var(--honey-soft), var(--amber)); height: 4px; transition: height .12s ease, background .3s ease; }
 .eq.playing .eq-bar { background: linear-gradient(180deg, var(--honey-soft), var(--honey)); box-shadow: 0 0 8px var(--wax-glow); animation: honeyShift 3.2s ease-in-out infinite alternate; }
 @keyframes honeyShift { 0% { filter: hue-rotate(0deg) saturate(1); } 100% { filter: hue-rotate(22deg) saturate(1.25); } }
@@ -122,7 +126,8 @@ main { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; paddin
 
 
 /* ===== Transport controls ===== */
-.transport { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.transport { display: flex; align-items: center; gap: 12px; flex: 1 1 auto; min-width: 0; flex-wrap: wrap; flex-shrink: 0; }
+.tp-btn { flex: 0 0 auto; }
 .tp-btn {
   width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
   border: 1px solid var(--line); background: var(--comb-lit); color: var(--honey);
@@ -278,3 +283,14 @@ body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out 
 @keyframes detailUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 620px) { .detail { align-items: center; } }
 @media (prefers-reduced-motion: reduce) { .detail-backdrop, .detail-card { animation: none !important; } }
+
+/* ===== QR share ===== */
+.qr-btn { position: fixed; right: 18px; bottom: 18px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--honey); color: #2a1c00; font-size: 1.1rem; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 12px var(--wax-glow); transition: transform .15s ease, background .15s ease, color .15s ease; }
+.qr-btn:hover { transform: scale(1.08) rotate(-6deg); background: var(--honey-soft); }
+.qr-modal { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; background: rgba(10,7,13,0.7); backdrop-filter: blur(4px); }
+.qr-modal[hidden] { display: none; }
+.qr-card { position: relative; background: var(--comb); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.qr-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--comb-lit); color: var(--honey); cursor: pointer; font-size: 0.9rem; line-height: 1; }
+.qr-title { color: var(--honey); font-size: 1rem; margin: 0 0 12px; }
+.qr-img { width: 200px; height: 200px; margin: 0 auto; display: block; border-radius: 8px; background: #fff; padding: 8px; box-sizing: border-box; }
+.qr-url { color: var(--ink-soft); font-size: 0.75rem; word-break: break-all; margin: 12px 0 0; }
