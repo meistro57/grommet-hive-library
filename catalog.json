@@ -306,6 +306,11 @@
       "title": "YM2612 Street Rap",
       "audio": "audio/ym2612-street-rap.mp3",
       "cover": "covers/ym2612-street-rap.jpg"
+    },
+    {
+      "title": "Zelda Acid Trip",
+      "audio": "audio/zelda-acid-trip.mp3",
+      "cover": "covers/zelda-acid-trip.jpg"
     }
   ]
 }
