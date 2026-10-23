@@ -296,6 +296,16 @@
       "title": "Grit and Glitter Barbie",
       "audio": "audio/grit-and-glitter-barbie.mp3",
       "cover": "covers/grit-and-glitter-barbie.jpg"
+    },
+    {
+      "title": "Skill Billy",
+      "audio": "audio/skill-billy.mp3",
+      "cover": "covers/skill-billy.jpg"
+    },
+    {
+      "title": "YM2612 Street Rap",
+      "audio": "audio/ym2612-street-rap.mp3",
+      "cover": "covers/ym2612-street-rap.jpg"
     }
   ]
 }
