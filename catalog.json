@@ -313,14 +313,14 @@
       "cover": "covers/zelda-acid-trip.jpg"
     },
     {
-      "title": "Low and Easy",
+      "title": "Lump",
       "audio": "audio/low-and-easy.mp3",
       "cover": "covers/low-and-easy.jpg"
     },
     {
-      "title": "Lump",
-      "audio": "audio/lump.mp3",
-      "cover": "covers/lump.jpg"
+      "title": "Da Chef",
+      "audio": "audio/da-chef.mp3",
+      "cover": "covers/da-chef.jpg"
     }
   ]
 }
