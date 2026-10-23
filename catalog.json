@@ -311,6 +311,16 @@
       "title": "Zelda Acid Trip",
       "audio": "audio/zelda-acid-trip.mp3",
       "cover": "covers/zelda-acid-trip.jpg"
+    },
+    {
+      "title": "Low and Easy",
+      "audio": "audio/low-and-easy.mp3",
+      "cover": "covers/low-and-easy.jpg"
+    },
+    {
+      "title": "Lump",
+      "audio": "audio/lump.mp3",
+      "cover": "covers/lump.jpg"
     }
   ]
 }
