@@ -321,6 +321,51 @@
       "title": "Da Chef",
       "audio": "audio/da-chef.mp3",
       "cover": "covers/da-chef.jpg"
+    },
+    {
+      "title": "YM2612 Bass Mekanik",
+      "audio": "audio/ym2612-bass-mekanik.mp3",
+      "cover": "covers/ym2612-bass-mekanik.jpg"
+    },
+    {
+      "title": "YM2612 Squarepusher Glitch",
+      "audio": "audio/ym2612-squarepusher-glitch.mp3",
+      "cover": "covers/ym2612-squarepusher-glitch.jpg"
+    },
+    {
+      "title": "YM2612 DJ Mix",
+      "audio": "audio/ym2612-dj-mix.mp3",
+      "cover": "covers/ym2612-dj-mix.jpg"
+    },
+    {
+      "title": "YM2612 Circuit Bent",
+      "audio": "audio/ym2612-circuit-bent.mp3",
+      "cover": "covers/ym2612-circuit-bent.jpg"
+    },
+    {
+      "title": "Low and Easy (Tape Wow)",
+      "audio": "audio/low-and-easy-tape-wow.mp3",
+      "cover": "covers/low-and-easy-tape-wow.jpg"
+    },
+    {
+      "title": "Low and Easy (Stutter Glitch)",
+      "audio": "audio/low-and-easy-stutter-glitch.mp3",
+      "cover": "covers/low-and-easy-stutter-glitch.jpg"
+    },
+    {
+      "title": "Low and Easy (Heavy Warp)",
+      "audio": "audio/low-and-easy-heavy-warp.mp3",
+      "cover": "covers/low-and-easy-heavy-warp.jpg"
+    },
+    {
+      "title": "Low and Easy (Full Melt)",
+      "audio": "audio/low-and-easy-full-melt.mp3",
+      "cover": "covers/low-and-easy-full-melt.jpg"
+    },
+    {
+      "title": "Flowstate Junky",
+      "audio": "audio/flowstate-junky.mp3",
+      "cover": "covers/flowstate-junky.jpg"
     }
   ]
 }
