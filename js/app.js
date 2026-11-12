@@ -361,8 +361,8 @@
       particles = particles.filter(p => p.life > 0);
       particles.forEach(p => {
         p.x += p.vx; p.y += p.vy; p.life -= .018; p.vy -= .004;
-        ctx.globalAlpha = Math.max(0,p.life); ctx.fillStyle = '#f5b82e';
-        ctx.shadowBlur = 8; ctx.shadowColor = '#f5b82e';
+        ctx.globalAlpha = Math.max(0,p.life); ctx.fillStyle = '#f2a93b';
+        ctx.shadowBlur = 8; ctx.shadowColor = '#f2a93b';
         ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
       });
       ctx.globalAlpha = 1; ctx.shadowBlur = 0;
@@ -398,7 +398,7 @@
         if (data) {
           let s = 0; for (let i = 0; i < data.length; i++) s += data[i];
           const inten = Math.min(1, (s / data.length) / 90);
-          player.style.boxShadow = '0 0 ' + Math.round(10 + inten * 50) + 'px rgba(245,184,46,' + (0.14 + inten * .5) + '), 0 12px 40px rgba(0,0,0,0.4)';
+          player.style.boxShadow = '0 0 ' + Math.round(10 + inten * 50) + 'px rgba(242,169,59,' + (0.14 + inten * .5) + '), 0 12px 40px rgba(0,0,0,0.4)';
           if (eqBars.length && !reducedMotion) {
             const n = eqBars.length;
             for (let b = 0; b < n; b++) {
