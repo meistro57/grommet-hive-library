@@ -323,9 +323,9 @@
       "cover": "covers/ym2612-bass-mekanik.jpg"
     },
     {
-      "title": "YM2612 Squarepusher Glitch",
-      "audio": "audio/ym2612-squarepusher-glitch.mp3",
-      "cover": "covers/ym2612-squarepusher-glitch.jpg"
+      "title": "YM2612 Glitch Melt",
+      "audio": "audio/ym2612-glitch-melt.mp3",
+      "cover": "covers/ym2612-glitch-melt.jpg"
     },
     {
       "title": "YM2612 DJ Mix",
@@ -341,6 +341,41 @@
       "title": "Flowstate Junky",
       "audio": "audio/flowstate-junky.mp3",
       "cover": "covers/flowstate-junky.jpg"
+    },
+    {
+      "title": "Tiny Hero With a Wrench",
+      "audio": "audio/tiny-hero-with-a-wrench.mp3",
+      "cover": "covers/tiny-hero-with-a-wrench.jpg"
+    },
+    {
+      "title": "Lifes Lubricant",
+      "audio": "audio/lifes-lubricant.mp3",
+      "cover": "covers/lifes-lubricant.jpg"
+    },
+    {
+      "title": "Workshop Report: State of the Hive",
+      "audio": "audio/workshop-report-state-of-the-hive.mp3",
+      "cover": "covers/workshop-report-state-of-the-hive.jpg"
+    },
+    {
+      "title": "Lab Report: Quarrel Inside the Arrow",
+      "audio": "audio/lab-report-quarrel-inside-the-arrow.mp3",
+      "cover": "covers/lab-report-quarrel-inside-the-arrow.jpg"
+    },
+    {
+      "title": "Play-by-Play (Bike Upright)",
+      "audio": "audio/play-by-play-bike-upright.mp3",
+      "cover": "covers/play-by-play-bike-upright.jpg"
+    },
+    {
+      "title": "Day Report: SHO Throwdown",
+      "audio": "audio/day-report-sho-throwdown.mp3",
+      "cover": "covers/day-report-sho-throwdown.jpg"
+    },
+    {
+      "title": "Silence Is Optimal",
+      "audio": "audio/silence-is-optimal.mp3",
+      "cover": "covers/silence-is-optimal.jpg"
     }
   ]
 }
