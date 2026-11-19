@@ -376,6 +376,11 @@
       "title": "Silence Is Optimal",
       "audio": "audio/silence-is-optimal.mp3",
       "cover": "covers/silence-is-optimal.jpg"
+    },
+    {
+      "title": "Eli the Archivist",
+      "audio": "audio/eli-the-archivist.mp3",
+      "cover": "covers/eli-the-archivist.jpg"
     }
   ]
 }
