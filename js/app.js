@@ -81,6 +81,9 @@
   /* =====================================================================
      SHELF — filters, search, sort, grid
      ===================================================================== */
+  // Favourites saved for tracks that have since left the catalog are kept but not counted.
+  const favCount = () => S.tracks.filter((t) => S.favs.has(t.title)).length;
+
   function computeView() {
     let list = S.tracks.slice();
     if (S.mood === 'Favourites') list = list.filter((t) => S.favs.has(t.title));
@@ -97,7 +100,7 @@
     S.tracks.forEach((t) => t.mood.forEach((m) => counts.set(m, (counts.get(m) || 0) + 1)));
     const moods = [...counts.keys()].filter((m) => m !== 'All').sort((a, b) => counts.get(b) - counts.get(a));
     filtersN.innerHTML = '';
-    const fav = el('button', 'chip fav', `${icon('i-heart-fill')}Favourites <small id="fav-count">${S.favs.size}</small>`);
+    const fav = el('button', 'chip fav', `${icon('i-heart-fill')}Favourites <small id="fav-count">${favCount()}</small>`);
     fav.dataset.mood = 'Favourites'; fav.type = 'button';
     filtersN.appendChild(fav);
     ['All', ...moods].forEach((m) => {
@@ -172,7 +175,7 @@
     const act = e.target.closest('[data-act]');
     if (act) {
       e.stopPropagation();
-      if (act.dataset.act === 'play') { if (S.current === t) togglePlay(); else playFrom(t, S.view, shelfLabel()); }
+      if (act.dataset.act === 'play') playOrToggle(t, S.view, shelfLabel());
       else if (act.dataset.act === 'fav') toggleFav(t);
       else if (act.dataset.act === 'dl') download(t);
       return;
@@ -233,7 +236,7 @@
       b.style.cssText = `--q:${q};--r:${r};--n:${i + 1}`;
       b.dataset.slug = t.slug;
       b.setAttribute('aria-label', `Play ${t.name}`);
-      b.addEventListener('click', () => { if (S.current === t) togglePlay(); else playFrom(t, newestFirst(), 'the newest'); });
+      b.addEventListener('click', () => playOrToggle(t, newestFirst(), 'the newest'));
       comb.appendChild(b);
     });
   }
@@ -330,7 +333,7 @@
     if (ftElapsed >= ROTATE_MS) { setFeatured(S.fi + 1); restartRotation(); }
     ftRaf = requestAnimationFrame(rotationTick);
   }
-  const ftPlay = () => { const t = S.featured[S.fi]; if (S.current === t) togglePlay(); else playFrom(t, S.featured, 'fresh off the press'); };
+  const ftPlay = () => playOrToggle(S.featured[S.fi], S.featured, 'fresh off the press');
   ftRecord.addEventListener('click', ftPlay);
   $('ft-play').addEventListener('click', ftPlay);
   $('ft-details').addEventListener('click', () => openDetail(S.featured[S.fi], null, $('ft-cover')));
@@ -370,6 +373,21 @@
       for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [rest[i], rest[j]] = [rest[j], rest[i]]; }
       S.order = [startIdx, ...rest];
     } else S.order = idx;
+  }
+
+  // Same tracks in the same order?
+  const sameList = (a, b) => a.length === b.length && a.every((t, i) => t === b[i]);
+  // Play/pause a track from a given list. If it's the current track but the queue came
+  // from somewhere else (e.g. a resumed session), re-bind the queue to this list first,
+  // so "next" stays inside what you're looking at.
+  function playOrToggle(t, list, label) {
+    if (S.current !== t) { playFrom(t, list, label); return; }
+    if (!sameList(S.queue, list)) {
+      S.queue = list.slice(); S.queueLabel = label || 'the hive';
+      S.qi = Math.max(0, S.queue.indexOf(t)); buildOrder(S.qi);
+      npContext.textContent = 'from ' + S.queueLabel; syncImmersive(); persist(true);
+    }
+    togglePlay();
   }
 
   function playFrom(t, list, label) {
@@ -558,7 +576,7 @@
       b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
       b.querySelector('use').setAttribute('href', on ? '#i-heart-fill' : '#i-heart');
     });
-    const fc = $('fav-count'); if (fc) fc.textContent = S.favs.size;
+    const fc = $('fav-count'); if (fc) fc.textContent = favCount();
     if (S.current) {
       const on = S.favs.has(S.current.title);
       dockFav.setAttribute('aria-pressed', String(on));
@@ -617,7 +635,7 @@
     const now = Date.now();
     if (!force && now - lastSave < 4000) return;
     lastSave = now;
-    if (S.current) store.set('grommet_state', JSON.stringify({ slug: S.current.slug, t: Math.floor(audio.currentTime || 0), label: S.queueLabel }));
+    if (S.current) store.set('grommet_state', JSON.stringify({ slug: S.current.slug, t: Math.floor(audio.currentTime || 0), label: S.queueLabel, q: S.queue.map((x) => x.slug) }));
   }
   addEventListener('pagehide', () => persist(true));
 
@@ -798,7 +816,7 @@
     m.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) closeDetail(); });
     $('detail-play').addEventListener('click', () => {
       const t = detail.track; if (!t) return;
-      if (S.current === t) togglePlay(); else playFrom(t, S.view.includes(t) ? S.view : S.tracks, S.view.includes(t) ? shelfLabel() : 'the hive');
+      if (S.view.includes(t)) playOrToggle(t, S.view, shelfLabel()); else playOrToggle(t, S.tracks, 'the hive');
       closeDetail();
     });
     $('detail-fav').addEventListener('click', () => toggleFav(detail.track));
@@ -1029,13 +1047,18 @@
       const hash = new URLSearchParams(location.hash.slice(1)).get('t');
       const linked = hash && S.bySlug.get(hash);
       let saved = null; try { saved = JSON.parse(store.get('grommet_state', 'null')); } catch (e) { /* noop */ }
-      if (linked) {
+      // A link to the track you were already on is just a reload: resume, don't treat it as a share.
+      if (linked && !(saved && saved.slug === linked.slug)) {
         S.queue = newestFirst(); S.qi = S.queue.indexOf(linked); S.queueLabel = 'a shared link'; buildOrder(S.qi);
         load(linked, false);
         openDetail(linked, null);
       } else if (saved && S.bySlug.get(saved.slug)) {
         const t = S.bySlug.get(saved.slug);
-        S.queue = newestFirst(); S.qi = S.queue.indexOf(t); S.queueLabel = saved.label || 'the hive'; buildOrder(S.qi);
+        // Restore the exact queue (dropping tracks no longer in the catalog); old saves fall back to everything.
+        const q = Array.isArray(saved.q) ? saved.q.map((sl) => S.bySlug.get(sl)).filter(Boolean) : [];
+        const restored = q.includes(t);
+        S.queue = restored ? q : newestFirst(); S.queueLabel = restored ? (saved.label || 'the hive') : 'the hive';
+        S.qi = S.queue.indexOf(t); buildOrder(S.qi);
         load(t, false, saved.t || 0);
         npContext.textContent = saved.t > 5 ? `resume from ${fmt(saved.t)}` : 'ready when you are';
         history.replaceState(null, '', location.pathname);
