@@ -136,7 +136,7 @@
       if (t.isNew) { const nb = document.createElement('span'); nb.className = 'new-badge'; nb.textContent = 'NEW'; name.appendChild(nb); }
       const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = t.mood.join(' · ');
       card.appendChild(art); card.appendChild(name); card.appendChild(meta);
-      card.appendChild(favButton(t));
+      card.appendChild(favButton(t)); card.appendChild(dlButton(t));
       card.addEventListener('click', () => openDetail(t, card));
       card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(t, card); } });
       gridN.appendChild(card);
@@ -581,6 +581,12 @@
 
     actions.appendChild(playBtn);
     actions.appendChild(favBtn);
+    const dlBtn = document.createElement('button');
+    dlBtn.className = 'detail-dl';
+    dlBtn.type = 'button';
+    dlBtn.textContent = '⬇ Download';
+    dlBtn.addEventListener('click', () => { if (detailTrack) downloadTrack(detailTrack); });
+    actions.appendChild(dlBtn);
 
     card.appendChild(close);
     card.appendChild(art);
@@ -655,4 +661,25 @@
     detailTrack = null;
     if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
+
+  /* DOWNLOAD */
+  function dlButton(t) {
+    var b = document.createElement('button');
+    b.className = 'dl-btn';
+    b.textContent = '⬇';
+    b.setAttribute('aria-label', 'Download ' + t.title);
+    b.setAttribute('title', 'Download');
+    b.addEventListener('click', function(e) { e.stopPropagation(); downloadTrack(t); });
+    return b;
+  }
+  function downloadTrack(t) {
+    var a = document.createElement('a');
+    a.href = t.audio;
+    a.download = t.title.replace(/[^a-z0-9]/gi, '_') + '.mp3';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
 })();

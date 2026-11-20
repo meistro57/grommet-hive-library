@@ -303,3 +303,20 @@ body.feral .hive-bg::after { opacity: 0.9; animation: combpulse .3s ease-in-out 
 ::selection { background: rgba(242,169,59,0.35); }
 .filters button:focus-visible, .tp-btn:focus-visible { box-shadow: 0 0 0 2px var(--violet); }
 .foot-sub code { font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--violet-soft); }
+
+/* ===== DOWNLOAD BUTTON ===== */
+.dl-btn {
+  position: absolute; top: 8px; right: 44px; z-index: 6;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--line); background: rgba(18,12,7,0.55);
+  color: var(--ink-soft); font-size: 0.85rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s ease; backdrop-filter: blur(3px);
+}
+.dl-btn:hover { border-color: var(--honey); color: var(--honey); }
+.detail-dl {
+  border: 1px solid var(--line); background: var(--comb-lit); color: var(--ink-soft);
+  border-radius: 999px; padding: 12px 20px; cursor: pointer; font-size: 1rem;
+  transition: all .18s ease; white-space: nowrap; flex-shrink: 0;
+}
+.detail-dl:hover { border-color: var(--honey); color: var(--honey); }
