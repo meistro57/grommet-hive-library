@@ -396,6 +396,11 @@
       "title": "Thanksgiving Turf War",
       "audio": "audio/thanksgiving-turf-war.mp3",
       "cover": "covers/thanksgiving-turf-war.jpg"
+    },
+    {
+      "title": "We Found the Thread",
+      "audio": "audio/we-found-the-thread.mp3",
+      "cover": "covers/we-found-the-thread.jpg"
     }
   ]
 }
