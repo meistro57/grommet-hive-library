@@ -386,6 +386,11 @@
       "title": "November's Tuesday",
       "audio": "audio/november-s-tuesday.mp3",
       "cover": "covers/november-s-tuesday.jpg"
+    },
+    {
+      "title": "Gobble in the Shadows",
+      "audio": "audio/gobble-in-the-shadows.mp3",
+      "cover": "covers/gobble-in-the-shadows.jpg"
     }
   ]
 }
