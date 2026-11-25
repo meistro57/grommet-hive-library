@@ -381,6 +381,11 @@
       "title": "Pumpernickel Blues",
       "audio": "audio/pumpernickel-blues.mp3",
       "cover": "covers/pumpernickel-blues.jpg"
+    },
+    {
+      "title": "November's Tuesday",
+      "audio": "audio/november-s-tuesday.mp3",
+      "cover": "covers/november-s-tuesday.jpg"
     }
   ]
 }
