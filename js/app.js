@@ -58,6 +58,8 @@
     night: 'Night', walker: 'Night', breakdance: 'Break', 'get out': 'Defiant', control: 'Anthem',
     chiptune: 'Chiptune', ym2612: 'Chiptune', mix: 'Mix', dj: 'Mix', 'after dark': 'Mix', dark: 'Mix',
     report: 'Report', blues: 'Blues'
+,
+    thanksgiving: 'Holiday', christmas: 'Holiday', holiday: 'Holiday', turkey: 'Holiday', gobble: 'Holiday', pumpernickel: 'Holiday',
   };
   // Display-only fixes for slug-generated titles (catalog titles stay the keys).
   const prettyFix = [[/\bLlc\b/g, 'LLC'], [/\bDj\b/g, 'DJ'], [/\bQmu\b/g, 'QMU'], [/\bBrendas\b/g, "Brenda's"], [/\bRomys\b/g, "Romy's"], [/\bLifes\b/g, "Life's"]];

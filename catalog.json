@@ -391,6 +391,11 @@
       "title": "Gobble in the Shadows",
       "audio": "audio/gobble-in-the-shadows.mp3",
       "cover": "covers/gobble-in-the-shadows.jpg"
+    },
+    {
+      "title": "Thanksgiving Turf War",
+      "audio": "audio/thanksgiving-turf-war.mp3",
+      "cover": "covers/thanksgiving-turf-war.jpg"
     }
   ]
 }
